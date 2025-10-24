@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Árvore do Conhecimento - Mapa Mental</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Tela Inicial -->
+    <div id="tela-inicial" class="tela ativa">
+        <div class="container">
+            <div class="logo">
+                <div class="icone-central">🧠</div>
+                <h1>Mapa Mental</h1>
+                <p class="subtitulo">Organize suas ideias e maximize sua memorização</p>
+            </div>
+            <div style="text-align: center;">
+                <button id="btn-iniciar" class="btn-principal">Criar Mapa Mental</button>
+            </div>
+
+            <!-- Dicas de Memorização -->
+            <div class="dicas-memorizacao">
+                <h3>🎯 Para que serve o Mapa Mental?</h3>
+                <ul>
+                    <li>Condensar informações para fixação e memorização</li>
+                    <li>Sistematizar dados e informações complexas</li>
+                    <li>Organizar o pensamento de forma visual</li>
+                    <li>Revisão rápida mesmo após muito tempo</li>
+                    <li>Ideal para preparação de provas e apresentações</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tela de Opções -->
+    <div id="tela-opcoes" class="tela">
+        <div class="container">
+            <h2>Como elaborar seu mapa mental</h2>
+            <p class="instrucoes">Siga estas etapas para criar um mapa mental eficiente</p>
+
+            <div class="etapas-container">
+                <div class="etapa ativa" data-etapa="1">
+                    <div class="numero-etapa">1</div>
+                    <h3>Tema Central</h3>
+                    <p>Defina o assunto principal e uma imagem representativa</p>
+                </div>
+
+                <div class="etapa bloqueada" data-etapa="2">
+                    <div class="numero-etapa">2</div>
+                    <h3>Subtemas</h3>
+                    <p>Identifique os tópicos principais do tema</p>
+                </div>
+
+                <div class="etapa bloqueada" data-etapa="3">
+                    <div class="numero-etapa">3</div>
+                    <h3>Detalhes</h3>
+                    <p>Adicione informações específicas e exemplos</p>
+                </div>
+
+                <div class="etapa bloqueada" data-etapa="4">
+                    <div class="numero-etapa">4</div>
+                    <h3>Recursos Visuais</h3>
+                    <p>Use cores e elementos para ajudar a memória</p>
+                </div>
+
+                <div class="etapa bloqueada" data-etapa="5">
+                    <div class="numero-etapa">5</div>
+                    <h3>Finalizar</h3>
+                    <p>Revise e visualize seu mapa mental</p>
+                </div>
+            </div>
+
+            <div style="text-align: center;">
+                <button id="btn-voltar-inicio" class="btn-secundario">Voltar ao Início</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Popup de Coleta de Informações -->
+    <div id="popup-info" class="popup">
+        <div class="popup-conteudo">
+            <span class="fechar">&times;</span>
+            <h2 id="popup-titulo">Tema Central</h2>
+            <form id="form-info" action="/cgi-bin/mapa_mental.exe" method="GET">
+                <div id="etapa-1" class="etapa-form ativa">
+                    <div class="campo">
+                        <label for="tema">Qual é o tema central do seu mapa mental?</label>
+                        <input type="text" id="tema" name="tema" placeholder="Ex: Inteligência Artificial" required>
+                    </div>
+                    <div class="campo">
+                        <label for="imagemTema">Imagem representativa (opcional)</label>
+                        <input type="text" id="imagemTema" name="imagemTema" placeholder="Ex: 🧠, 🤖, 💡">
+                    </div>
+                </div>
+
+                <div id="etapa-2" class="etapa-form">
+                    <div class="campo">
+                        <label for="subtemas">Quais são os principais subtemas? (separados por vírgula)</label>
+                        <textarea id="subtemas" name="subtemas"
+                            placeholder="Ex: Machine Learning, Processamento de Linguagem Natural, Visão Computacional"></textarea>
+                    </div>
+                </div>
+
+                <div id="etapa-3" class="etapa-form">
+                    <div class="campo">
+                        <label for="detalhes">Detalhes e informações específicas (um por linha)</label>
+                        <textarea id="detalhes" name="detalhes" placeholder="Ex: Aprendizado supervisionado
+Aprendizado não supervisionado
+Redes neurais artificiais"></textarea>
+                    </div>
+                </div>
+
+                <div id="etapa-4" class="etapa-form">
+                    <div class="campo">
+                        <label for="cores">Cores para categorias (opcional)</label>
+                        <input type="text" id="cores" name="cores" placeholder="Ex: Azul, Verde, Laranja">
+                    </div>
+                    <div class="campo">
+                        <label for="conexoes">Conexões importantes (formato: origem -> destino)</label>
+                        <textarea id="conexoes" name="conexoes"
+                            placeholder="Ex: Machine Learning -> Aprendizado supervisionado"></textarea>
+                    </div>
+                </div>
+
+                <div id="etapa-5" class="etapa-form">
+                    <div class="campo">
+                        <label for="tituloMapa">Título do seu mapa mental</label>
+                        <input type="text" id="tituloMapa" name="tituloMapa" placeholder="Ex: Mapa Mental de IA">
+                    </div>
+                </div>
+
+                <div class="botoes-popup">
+                    <button type="button" id="btn-anterior" class="btn-secundario">Anterior</button>
+                    <button type="button" id="btn-proximo" class="btn-principal">Próximo</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
