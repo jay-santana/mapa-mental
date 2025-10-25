@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Árvore do Conhecimento - Mapa Mental</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 
 <body>
@@ -13,13 +14,20 @@
     <div id="tela-inicial" class="tela ativa">
         <div class="container">
             <div class="logo">
-                <div class="icone-central">🧠</div>
-                <h1>Mapa Mental</h1>
-                <p class="subtitulo">Organize suas ideias e maximize sua memorização</p>
+                <div class="icone-central">
+                    <img id="icone" src="../assets/icone.png" alt="">
+                </div>
+                <div id="titulo"> 
+                    <h1>Árvore do Conhecimento</h1>
+                    <p class="subtitulo">Desbloqueie suas ideias. Crie mapas mentais incríveis</p>
+
+                </div>
+                
             </div>
             <div style="text-align: center;">
-                <button id="btn-iniciar" class="btn-principal">Criar Mapa Mental</button>
+                <button id="btn-iniciar" class="btn-principal"> Criar Mapa Mental <i class="fas fa-arrow-right" style="margin-left: 8px;"></i></button>
             </div>
+                 
 
             <!-- Dicas de Memorização -->
             <div class="dicas-memorizacao">
