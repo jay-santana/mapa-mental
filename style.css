@@ -331,7 +331,7 @@ h2 {
 }
 
 /* Tela do Mapa Mental - Design de Memorização */
-.cabecalho-mapa {
+/* .cabecalho-mapa {
     text-align: center;
     margin-bottom: 30px;
     padding-bottom: 20px;
@@ -369,6 +369,7 @@ h2 {
     overflow: auto;
     max-height: 70vh;
     min-height: 500px;
+    width: 100% aumentar area
 }
 
 .area-mapa {
@@ -377,14 +378,109 @@ h2 {
     min-height: 600px;
     transform-origin: center center;
     transition: transform 0.3s ease;
-}
+} */
 
 /* Design do Mapa Mental - Estilo Memorização */
-.mapa-mental {
+/* .mapa-mental {
     position: relative;
     width: 100%;
     height: 100%;
     padding: 50px;
+} */
+/* Container principal centralizado */
+#tela-mapa.container {
+    max-width: 1200px;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Cabeçalho com largura total */
+.cabecalho-mapa {
+    width: 100%;
+    text-align: center;
+}
+
+/* Títulos com cores corretas */
+.titulo-mapa {
+    color: #ffffff !important;
+    font-size: 2.2rem;
+    margin-bottom: 10px;
+}
+
+.subtitulo-mapa {
+    color: #ffffff !important;
+    font-size: 1.1rem;
+}
+
+/* Controles centralizados */
+.controles-mapa {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+/* Container do mapa centralizado */
+.area-mapa-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #f8f9fa;
+    border-radius: 15px;
+    padding: 20px;
+    border: 3px solid #e9ecef;
+    overflow: auto;
+    max-height: 70vh;
+    min-height: 500px;
+}
+
+.area-mapa-container::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.area-mapa-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.area-mapa-container::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 4px;
+}
+
+.area-mapa-container::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+/* Área do mapa centralizada */
+.area-mapa {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    min-width: min-content;
+    min-height: 600px;
+    transform-origin: center center;
+    transition: transform 0.3s ease;
+}
+
+/* Mapa mental centralizado */
+.mapa-mental {
+    position: relative;
+    min-width: 1400px;
+    min-height: 1000px;
+    margin: 0 auto;
+}
+
+/* Dicas com largura total */
+.dicas-memorizacao {
+    width: 100%;
+    margin-top: 30px;
 }
 
 .no {
@@ -444,6 +540,7 @@ h2 {
     z-index: 1;
     border-radius: 2px;
 }
+
 
 .controles-zoom {
     display: flex;
