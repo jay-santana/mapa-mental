@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', function () {
             1: 'Tema Central',
             2: 'Subtemas',
             3: 'Detalhes',
-            4: 'Recursos Visuais',
+            4: 'Conexoes',
             5: 'Finalizar'
         };
         document.getElementById('popup-titulo').textContent = titulos[etapaAtual];
