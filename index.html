@@ -23,8 +23,10 @@
                     <p class="subtitulo">Desbloqueie suas ideias. Crie mapas mentais incríveis</p>
                 </div>
             </div>
-            <div style="text-align: center;">
-                <button id="btn-iniciar" class="btn-principal"> Criar Mapa Mental <i class="fas fa-arrow-right" style="margin-left: 8px;"></i></button>
+            <div class="btn-container">
+                <button id="btn-iniciar" class="btn-principal"> 
+                    Criar Mapa Mental <i class="fas fa-arrow-right seta-btn"></i>
+                </button>
             </div>
 
             <!-- Dicas de Memorização -->
@@ -50,28 +52,36 @@
             <div class="etapas-container">
                 <div class="etapa ativa" data-etapa="1">
                     <div class="info-etapa">
-                        <h3 id="numero-etapas">1</h3>
-                        <h3 id="titulo-etapas">Tema Central</h3>
+                        <div class="numero-etapa">1</div>
+                        <h3 class="titulo-etapa">Tema Central</h3>
                     </div>
-                    <div id="info-container">
+                    <div class="info-container">
                         <p>Defina o assunto principal do seu mapa</p>
                     </div>
                 </div>
 
                 <div class="etapa bloqueada" data-etapa="2">
-                    <div class="numero-etapa">2</div>
-                    <h3>Nós do Mapa</h3>
-                    <p>Adicione subtemas, detalhes e conexões</p>
+                    <div class="info-etapa">
+                        <div class="numero-etapa">2</div>
+                        <h3 class="titulo-etapa">Nós do Mapa</h3>
+                    </div>
+                    <div class="info-container">
+                        <p>Adicione subtemas, detalhes e conexões</p>
+                    </div>
                 </div>
 
                 <div class="etapa bloqueada" data-etapa="3">
-                    <div class="numero-etapa">3</div>
-                    <h3>Finalizar</h3>
-                    <p>Revise e gere seu mapa mental</p>
+                    <div class="info-etapa">
+                        <div class="numero-etapa">3</div>
+                        <h3 class="titulo-etapa">Finalizar</h3>
+                    </div>
+                    <div class="info-container">
+                        <p>Revise e gere seu mapa mental</p>
+                    </div>
                 </div>
             </div>
 
-            <div style="text-align: center;">
+            <div class="btn-container">
                 <button id="btn-voltar-inicio" class="btn-secundario">Voltar ao Início</button>
             </div>
         </div>
@@ -104,21 +114,24 @@
                         <textarea id="detalhesNo" name="detalhesNo" placeholder="Ex: Aprendizado supervisionado
 Aprendizado não supervisionado
 Redes neurais artificiais"></textarea>
-                        <small style="color: #666;">Cada linha será um nó de detalhe conectado a este subtema</small>
+                        <small class="texto-ajuda">Cada linha será um nó de detalhe conectado a este subtema</small>
                     </div>
                     
                     <div class="campo">
                         <label for="conexoesNo">Conexões Importantes (formato: origem -> destino)</label>
                         <textarea id="conexoesNo" name="conexoesNo" placeholder="Ex: Machine Learning -> Deep Learning
 Aprendizado supervisionado -> Classificação"></textarea>
-                        <small style="color: #666;">Use este formato para conectar diferentes partes do mapa</small>
+                        <small class="texto-ajuda">Use este formato para conectar diferentes partes do mapa</small>
                     </div>
                     
-                    <div class="campo" style="background: #f8f9fa; padding: 15px; border-radius: 8px;">
-                        <label style="font-weight: bold; color: #2c3e50;">Resumo dos Nós Adicionados:</label>
-                        <div id="info-nos" style="margin-top: 8px; font-size: 0.9rem; color: #666;">
+                    <div class="container-info">
+                        <label class="label-destaque">Resumo dos Nós Adicionados:</label>
+                        <div id="info-nos" class="info-nos">
                             <em>Nenhum nó adicionado ainda</em>
                         </div>
+                        <button type="button" id="btn-finalizar-nos" class="btn-finalizar">
+                            Finalizar e Ir para Próxima Etapa
+                        </button>
                     </div>
                 </div>
 
@@ -128,9 +141,9 @@ Aprendizado supervisionado -> Classificação"></textarea>
                         <label for="tituloMapa">Título do seu mapa mental</label>
                         <input type="text" id="tituloMapa" name="tituloMapa" placeholder="Ex: Mapa Mental de IA">
                     </div>
-                    <div class="campo" style="background: #e8f5e8; padding: 15px; border-radius: 8px;">
-                        <h4 style="color: #27ae60; margin-bottom: 10px;">✅ Resumo do seu Mapa Mental</h4>
-                        <div id="resumo-final">
+                    <div class="container-resumo">
+                        <h4 class="titulo-resumo">✅ Resumo do seu Mapa Mental</h4>
+                        <div id="resumo-final" class="resumo-final">
                             <p><strong>Tema Central:</strong> <span id="resumo-tema">-</span></p>
                             <p><strong>Total de Nós:</strong> <span id="resumo-nos">0</span></p>
                             <p><strong>Total de Conexões:</strong> <span id="resumo-conexoes">0</span></p>
