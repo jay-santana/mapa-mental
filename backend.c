@@ -167,6 +167,7 @@ void gerarHTMLMapaMental(MapaMental* mapa) {
     printf("    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n");
     printf("    <title>%s</title>\n", mapa->tituloMapa);
     printf("    <link rel=\"stylesheet\" href=\"../style.css\">\n");
+    printf("    <script src=\"https://html2canvas.hertzen.com/dist/html2canvas.min.js\"></script>\n");
     printf("</head>\n");
     printf("<body>\n");
     printf("    <div id=\"tela-mapa\" class=\"tela ativa\">\n");
@@ -228,9 +229,9 @@ void gerarHTMLMapaMental(MapaMental* mapa) {
 	printf("            const areaMapa = document.getElementById('area-mapa');\n");
 	printf("            const infoZoom = document.getElementById('info-zoom');\n");
 	printf("            \n");
-	printf("            // Zoom inicial de 70%%\n");
-	printf("            areaMapa.style.transform = 'scale(0.7)';\n");
-	printf("            infoZoom.textContent = 'Zoom: 70%';\n");
+	printf("            // Zoom inicial de 85%%\n");
+	printf("            areaMapa.style.transform = 'scale(0.85)';\n");
+	printf("            infoZoom.textContent = 'Zoom: 85%';\n");
 	printf("            \n");
 	printf("            centralizarMapa();\n");
 	printf("        });\n");
@@ -238,7 +239,7 @@ void gerarHTMLMapaMental(MapaMental* mapa) {
     printf("        function aplicarZoom(fator) {\n");
     printf("            const areaMapa = document.getElementById('area-mapa');\n");
     printf("            const infoZoom = document.getElementById('info-zoom');\n");
-    printf("            let escala = parseFloat(areaMapa.style.transform.replace('scale(', '').replace(')', '')) || 0.7;\n");
+    printf("            let escala = parseFloat(areaMapa.style.transform.replace('scale(', '').replace(')', '')) || 0.85;\n");
     printf("            escala *= fator;\n");
     printf("            escala = Math.max(0.3, Math.min(3, escala));\n");
     printf("            areaMapa.style.transform = `scale(${escala})`;\n");
@@ -248,8 +249,8 @@ void gerarHTMLMapaMental(MapaMental* mapa) {
     printf("        function resetarZoom() {\n");
     printf("            const areaMapa = document.getElementById('area-mapa');\n");
     printf("            const infoZoom = document.getElementById('info-zoom');\n");
-    printf("            areaMapa.style.transform = 'scale(0.7)';\n");
-    printf("            infoZoom.textContent = 'Zoom: 70%';\n");
+    printf("            areaMapa.style.transform = 'scale(0.85)';\n");
+    printf("            infoZoom.textContent = 'Zoom: 85%';\n");
     printf("        }\n");
     printf("        \n");
     // NOVO: FunÃ§Ã£o para centralizar automaticamente o mapa
@@ -258,7 +259,7 @@ void gerarHTMLMapaMental(MapaMental* mapa) {
     printf("            const mapaMental = document.getElementById('mapa-mental-element');\n");
     printf("            if (areaMapa && mapaMental) {\n");
     printf("                // Centralizar horizontal e verticalmente\n");
-   	printf("                const escala = parseFloat(areaMapa.style.transform.replace('scale(', '').replace(')', '')) || 0.7;\n");
+   	printf("                const escala = parseFloat(areaMapa.style.transform.replace('scale(', '').replace(')', '')) || 0.85;\n");
 	printf("                const containerWidth = areaMapa.clientWidth;\n");
 	printf("                const containerHeight = areaMapa.clientHeight;\n");
 	printf("                const mapaWidth = mapaMental.scrollWidth * escala;\n");
@@ -282,13 +283,43 @@ void gerarHTMLMapaMental(MapaMental* mapa) {
     printf("        });\n");
     printf("        \n");
     printf("        document.getElementById('btn-download').addEventListener('click', function() {\n");
-    printf("            alert('Mapa mental gerado com sucesso! âœ…\\\\n\\\\nTema: %s\\\\nSubtema: %d\\\\nDetalhes: %d');\n",
-           mapa->tema, mapa->subtemas[0] != '\0' ? 1 : 0, mapa->detalhes[0] != '\0' ? 1 : 0);
+    printf("            // Resetar zoom temporariamente para captura\n");
+    printf("            const areaMapa = document.getElementById('area-mapa');\n");
+    printf("            const transformOriginal = areaMapa.style.transform;\n");
+    printf("            areaMapa.style.transform = 'scale(1)';\n");
+    printf("            \n");
+    printf("            // Capturar o mapa mental como imagem\n");
+    printf("            html2canvas(document.getElementById('mapa-mental-element'), {\n");
+    printf("                backgroundColor: '#ffffff',\n");
+    printf("                scale: 2,\n");
+    printf("                logging: false,\n");
+    printf("                useCORS: true\n");
+    printf("            }).then(function(canvas) {\n");
+    printf("                // Restaurar zoom\n");
+    printf("                areaMapa.style.transform = transformOriginal;\n");
+    printf("                \n");
+    printf("                // Criar link de download\n");
+    printf("                const link = document.createElement('a');\n");
+    printf("                link.download = 'mapa-mental-' + Date.now() + '.png';\n");
+    printf("                link.href = canvas.toDataURL('image/png');\n");
+    printf("                document.body.appendChild(link);\n");
+    printf("                link.click();\n");
+    printf("                document.body.removeChild(link);\n");
+    printf("                \n");
+    printf("                // Feedback para o usuário\n");
+    printf("                alert('Mapa mental salvo com sucesso! ?\\\\n\\\\nArquivo: ' + link.download);\n");
+    printf("            }).catch(function(error) {\n");
+    printf("                // Restaurar zoom em caso de erro\n");
+    printf("                areaMapa.style.transform = transformOriginal;\n");
+    printf("                alert('Erro ao salvar o mapa mental. Tente novamente.');\n");
+    printf("                console.error('Erro html2canvas:', error);\n");
+    printf("            });\n");
     printf("        });\n");
     printf("    </script>\n");
     printf("</body>\n");
     printf("</html>\n");
 }
+
 
 // FunÃ§Ã£o principal para processar dados e gerar mapa
 void processarMapaMental(MapaMental* mapa) {
