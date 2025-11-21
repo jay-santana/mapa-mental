@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const btnProximo = document.getElementById('btn-proximo');
     const etapasForm = document.querySelectorAll('.etapa-form');
     const etapasOpcoes = document.querySelectorAll('.etapa[data-etapa]');
+    const btnFinalizarNos = document.getElementById('btn-finalizar-nos');
 
     let etapaAtual = 1;
     const totalEtapas = 3; // Reduzido para 3 etapas
@@ -38,6 +39,16 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     btnFecharPopup.addEventListener('click', fecharPopup);
+
+    // Evento para o botão de finalizar nós
+    btnFinalizarNos.addEventListener('click', function() {
+        if (nosColetados.length > 0) {
+            etapaAtual++;
+            atualizarPopup();
+        } else {
+            alert('Adicione pelo menos um nó antes de finalizar.');
+        }
+    });
 
     // Navegação no popup
     btnAnterior.addEventListener('click', function () {
@@ -90,16 +101,46 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('detalhesNo').value = '';
         document.getElementById('conexoesNo').value = '';
 
+        // Atualizar o resumo imediatamente
+        atualizarResumoNos();
+
         // Perguntar se deseja adicionar mais nós
-        const adicionarMais = confirm(`Nó "${subtema}" adicionado com sucesso!\n\nDeseja adicionar outro nó?`);
-        
-        if (!adicionarMais) {
-            etapaAtual++;
-            atualizarPopup();
-        } else {
+        const adicionarMais = confirm(`Nó "${subtema}" adicionado com sucesso!\n\nDeseja adicionar outro nó?\n\nClique em "OK" para adicionar outro nó ou "Cancelar" para finalizar.`);
+
+        if (adicionarMais) {
             // Manter na mesma etapa para adicionar mais nós
             document.getElementById('subtema').focus();
+        } else {
+            etapaAtual++;
+            atualizarPopup();
         }
+    }
+
+    function atualizarResumoNos() {
+        const infoNos = document.getElementById('info-nos');
+        const btnFinalizarNos = document.getElementById('btn-finalizar-nos');
+        
+        if (nosColetados.length > 0) {
+            const listaNos = nosColetados.map(no => 
+                `• ${no.subtema} (${no.detalhes.length} detalhes, ${no.conexoes.length} conexões)`
+            ).join('<br>');
+            infoNos.innerHTML = `<strong>Nós adicionados (${nosColetados.length}):</strong><br>${listaNos}`;
+            btnFinalizarNos.style.display = 'block';
+        } else {
+            infoNos.innerHTML = '<em>Nenhum nó adicionado ainda</em>';
+            btnFinalizarNos.style.display = 'none';
+        }
+    }
+
+    function atualizarResumoFinal() {
+        const tema = document.getElementById('tema').value.trim();
+        const totalNos = nosColetados.length;
+        const totalConexoes = nosColetados.reduce((total, no) => total + no.conexoes.length, 0);
+        const totalDetalhes = nosColetados.reduce((total, no) => total + no.detalhes.length, 0);
+        
+        document.getElementById('resumo-tema').textContent = tema || '-';
+        document.getElementById('resumo-nos').textContent = totalNos + totalDetalhes; // Nós principais + detalhes
+        document.getElementById('resumo-conexoes').textContent = totalConexoes + totalDetalhes; // Conexões manuais + automáticas dos detalhes
     }
 
     function prepararFormularioFinal() {
@@ -160,22 +201,16 @@ document.addEventListener('DOMContentLoaded', function () {
         if (etapaAtual === 1) {
             btnProximo.textContent = 'Próximo';
         } else if (etapaAtual === 2) {
-            btnProximo.textContent = nosColetados.length > 0 ? 'Próximo Nó' : 'Adicionar Nó';
+            btnProximo.textContent = 'Adicionar Nó';
         } else {
             btnProximo.textContent = 'Gerar Mapa Mental';
         }
 
-        // Atualizar informações na etapa 2
+        // Atualizar informações nas etapas
         if (etapaAtual === 2) {
-            const infoNos = document.getElementById('info-nos');
-            if (nosColetados.length > 0) {
-                const listaNos = nosColetados.map(no => 
-                    `• ${no.subtema} (${no.detalhes.length} detalhes, ${no.conexoes.length} conexões)`
-                ).join('<br>');
-                infoNos.innerHTML = `<strong>Nós adicionados (${nosColetados.length}):</strong><br>${listaNos}`;
-            } else {
-                infoNos.innerHTML = '<em>Nenhum nó adicionado ainda</em>';
-            }
+            atualizarResumoNos();
+        } else if (etapaAtual === 3) {
+            atualizarResumoFinal();
         }
 
         // Atualizar etapas na tela de opções
